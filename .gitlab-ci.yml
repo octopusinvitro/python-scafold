@@ -1,0 +1,21 @@
+image: "python:3.8"
+
+before_script:
+  - python --version
+  - python -m pip install pipenv
+  - alias pipenv="python -m pipenv"
+  - pipenv install
+
+stages:
+  - Static Analysis
+  - Test
+
+unittest:
+  stage: Test
+  script:
+    - . bin/test
+
+flake8:
+  stage: Static Analysis
+  script:
+  - . bin/lint
